@@ -18,7 +18,7 @@ end
 class Deck
   attr_reader :cards
   def initialize
-    @cards = FlashCardParser.load("flashcard_data.txt") # array
+    @cards = FlashCardParser.load("flashcard_data.txt") # array of Flashcard objects
     @cards.shuffle!
   end
 
@@ -26,10 +26,18 @@ class Deck
     @cards.pop
   end
 
+  def repeat_card(card)
+    @cards.unshift(card)
+  end
+
+  def game_over?
+    !@cards.any?
+  end
+
 end
 
-deck = Deck.new
-card = deck.get_next_card
-puts card.definition
-answer = gets.chomp
-puts card.correct?(answer)
+# deck = Deck.new
+# card = deck.get_next_card
+# puts card.definition
+# answer = gets.chomp
+# puts card.correct?(answer)
